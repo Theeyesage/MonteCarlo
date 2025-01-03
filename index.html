@@ -11,27 +11,14 @@
         "imageUrl": "https://via.placeholder.com/600x400.png?text=Monte+Carlo+Simulation",
         "splashImageUrl": "https://via.placeholder.com/200.png?text=Loading",
         "splashBackgroundColor": "#6a0dad",
-        "buttons": [
-            {
-                "title": "Enter Crypto Ticker",
-                "action": {
-                    "type": "post",
-                    "url": "/frame-handler",
-                    "payload": {
-                        "type": "input",
-                        "key": "cryptoTicker"
-                    }
-                }
-            },
-            {
-                "title": "Run Simulation",
-                "action": {
-                    "type": "launch_frame",
-                    "url": "https://monte-carlo-gamma.vercel.app/",
-                    "splashBackgroundColor": "#6a0dad"
-                }
+        "button": {
+            "title": "Run Monte Carlo Simulation",
+            "action": {
+                "type": "launch_frame",
+                "url": "https://monte-carlo-gamma.vercel.app/",
+                "name": "Monte Carlo Simulation"
             }
-        ]
+        }
     }' />
 
     <!-- Include Chart.js -->
@@ -55,32 +42,6 @@
             margin-bottom: 20px;
         }
 
-        .input-container {
-            margin: 10px;
-        }
-
-        input {
-            padding: 10px;
-            font-size: 16px;
-            width: 250px;
-            margin-right: 10px;
-        }
-
-        .button {
-            margin: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
-            color: #fff;
-            background-color: #8a2be2;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .button:hover {
-            background-color: #7a1fa2;
-        }
-
         .chart-container {
             margin-top: 20px;
             background-color: white;
@@ -95,118 +56,12 @@
 </head>
 <body>
     <h1>Monte Carlo Simulation</h1>
-    <div class="input-container">
-        <input type="text" id="cryptoTicker" placeholder="Enter Crypto Ticker (e.g., BTC)">
-        <button class="button" onclick="saveTicker()">Enter Ticker</button>
-    </div>
-    <div class="button-container">
-        <button class="button" onclick="runSimulation()">Run Simulation</button>
-    </div>
-    <div class="chart-container">
-        <canvas id="simulationChart" width="800" height="400"></canvas>
+    <div>
+        <button class="button" onclick="window.location.href='https://monte-carlo-gamma.vercel.app/'">Run Simulation</button>
     </div>
 
     <script>
-        let chartInstance;
-        let selectedTicker = '';
-
-        function saveTicker() {
-            selectedTicker = document.getElementById("cryptoTicker").value;
-            if (!selectedTicker) {
-                alert("Please enter a valid cryptocurrency ticker!");
-                return;
-            }
-            alert(`Ticker "${selectedTicker}" saved!`);
-        }
-
-        async function fetchHistoricalData(ticker) {
-            const url = `https://api.coingecko.com/api/v3/coins/${ticker}/market_chart?vs_currency=usd&days=120`;
-            try {
-                const response = await fetch(url);
-                if (!response.ok) throw new Error("Unable to fetch historical data.");
-                const data = await response.json();
-                return data.prices.map(price => price[1]);
-            } catch (error) {
-                console.error(error);
-                throw new Error("Unable to fetch the historical data. Please check the crypto ticker.");
-            }
-        }
-
-        function calculateDailyReturns(prices) {
-            return prices.slice(1).map((price, i) => (price - prices[i]) / prices[i]);
-        }
-
-        function monteCarloSimulation(startPrice, dailyReturns, numDays = 30, numSimulations = 300) {
-            const simulations = [];
-            const avgPrices = Array(numDays).fill(0);
-
-            for (let i = 0; i < numSimulations; i++) {
-                const simulation = [startPrice];
-                for (let j = 1; j <= numDays; j++) {
-                    const randomReturn = dailyReturns[Math.floor(Math.random() * dailyReturns.length)];
-                    const nextPrice = simulation[j - 1] * (1 + randomReturn);
-                    simulation.push(nextPrice);
-                    avgPrices[j - 1] += nextPrice / numSimulations;
-                }
-                simulations.push(simulation);
-            }
-
-            return { simulations, avgPrices };
-        }
-
-        async function runSimulation() {
-            if (!selectedTicker) {
-                alert("Please enter and save a cryptocurrency ticker first!");
-                return;
-            }
-            try {
-                const historicalPrices = await fetchHistoricalData(selectedTicker.toLowerCase());
-                const startPrice = historicalPrices[historicalPrices.length - 1];
-                const dailyReturns = calculateDailyReturns(historicalPrices);
-                const { simulations, avgPrices } = monteCarloSimulation(startPrice, dailyReturns);
-
-                const ctx = document.getElementById("simulationChart").getContext("2d");
-                const datasets = simulations.map(simulation => ({
-                    data: simulation,
-                    borderColor: "rgba(75, 192, 192, 0.1)",
-                    borderWidth: 1,
-                    fill: false,
-                    pointRadius: 0,
-                }));
-                datasets.push({
-                    label: "Average Price",
-                    data: avgPrices,
-                    borderColor: "red",
-                    borderWidth: 2,
-                    fill: false,
-                });
-
-                if (chartInstance) {
-                    chartInstance.destroy();
-                }
-
-                chartInstance = new Chart(ctx, {
-                    type: "line",
-                    data: {
-                        labels: Array.from({ length: 30 }, (_, i) => `Day ${i + 1}`),
-                        datasets: datasets,
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            legend: { display: false },
-                        },
-                        scales: {
-                            x: { title: { display: true, text: "Days" } },
-                            y: { title: { display: true, text: "Price (USD)" } },
-                        },
-                    },
-                });
-            } catch (error) {
-                console.error(error);
-                alert(error.message);
-            }
-        }
+        // Optional: Add any specific logic needed for the app to function
     </script>
 </body>
 </html>
