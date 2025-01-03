@@ -4,8 +4,7 @@
   "homeUrl": "https://monte-carlo-gamma.vercel.app/",
   "iconUrl": "https://via.placeholder.com/200.png?text=Icon",
   "imageUrl": "https://via.placeholder.com/600x400.png?text=Monte+Carlo+Simulation",
-  "buttonTitle": "Enter Simulation",
+  "buttonTitle": "Run Simulation",
   "splashImageUrl": "https://via.placeholder.com/200.png?text=Loading",
   "splashBackgroundColor": "#6a0dad"
 }
-
