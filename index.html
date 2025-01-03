@@ -3,26 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monte Carlo Simulation</title>
+
+    <!-- Farcaster Frame Metadata -->
     <meta name="fc:frame" content='{
         "version": "next",
         "imageUrl": "https://example.com/monte-carlo-simulation-thumbnail.png",
+        "splashImageUrl": "https://example.com/splash.png",
+        "splashBackgroundColor": "#6a0dad",
         "button": {
             "title": "Run Monte Carlo",
             "action": {
                 "type": "launch_frame",
                 "name": "Monte Carlo Simulation",
-                "url": "https://monte-carlo-gamma.vercel.app/",
-                "splashImageUrl": "https://example.com/splash.png",
-                "splashBackgroundColor": "#6a0dad"
+                "url": "https://monte-carlo-gamma.vercel.app/"
             }
         }
     }' />
-    <title>Monte Carlo Simulation</title>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
-            background-color: #6a0dad; /* Purple background */
-            color: black; /* Black text */
+            background-color: #6a0dad;
+            color: black;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -43,7 +46,7 @@
             padding: 10px 20px;
             font-size: 16px;
             color: #fff;
-            background-color: #8a2be2; /* Light purple button */
+            background-color: #8a2be2;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -51,7 +54,7 @@
         }
 
         .button:hover {
-            background-color: #7a1fa2; /* Darker purple on hover */
+            background-color: #7a1fa2;
         }
 
         .chart-container {
@@ -62,11 +65,11 @@
         }
 
         canvas {
-            background-color: white; /* White chart background */
+            background-color: white;
         }
 
         .footer-button {
-            margin-top: 40px; /* Increased margin to move it further down */
+            margin-top: 40px;
             padding: 10px 20px;
         }
     </style>
@@ -168,23 +171,11 @@
                     options: {
                         responsive: true,
                         plugins: {
-                            legend: {
-                                display: false,
-                            },
+                            legend: { display: false },
                         },
                         scales: {
-                            x: {
-                                title: {
-                                    display: true,
-                                    text: "Days",
-                                },
-                            },
-                            y: {
-                                title: {
-                                    display: true,
-                                    text: "Price (USD)",
-                                },
-                            },
+                            x: { title: { display: true, text: "Days" } },
+                            y: { title: { display: true, text: "Price (USD)" } },
                         },
                     },
                 });
