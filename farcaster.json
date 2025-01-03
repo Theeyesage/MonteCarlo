@@ -1,0 +1,10 @@
+{
+  "name": "Monte Carlo Simulation",
+  "author": "Your Name",
+  "homeUrl": "https://your-hosted-site.com/monte-carlo-simulation",
+  "iconUrl": "https://your-hosted-site.com/icon.png",
+  "imageUrl": "https://your-hosted-site.com/monte-carlo-thumbnail.png",
+  "buttonTitle": "Run Monte Carlo",
+  "splashImageUrl": "https://your-hosted-site.com/splash.png",
+  "splashBackgroundColor": "#6a0dad"
+}
