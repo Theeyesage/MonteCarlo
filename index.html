@@ -15,7 +15,7 @@
             "title": "Run Monte Carlo Simulation",
             "action": {
                 "type": "launch_frame",
-                "url": "https://monte-carlo-gamma.vercel.app/",
+                "url": "https://your-deployed-url.vercel.app/",
                 "name": "Monte Carlo Simulation"
             }
         }
@@ -24,7 +24,6 @@
     <!-- Include Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <!-- Inline Styles -->
     <style>
         body {
             background-color: #6a0dad;
@@ -52,16 +51,39 @@
         canvas {
             background-color: white;
         }
+
+        .button {
+            margin: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #8a2be2;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #7a1fa2;
+        }
     </style>
 </head>
 <body>
     <h1>Monte Carlo Simulation</h1>
     <div>
-        <button class="button" onclick="window.location.href='https://monte-carlo-gamma.vercel.app/'">Run Simulation</button>
+        <button class="button" onclick="runSimulation()">Run Simulation</button>
+    </div>
+    <div class="chart-container">
+        <canvas id="simulationChart" width="800" height="400"></canvas>
     </div>
 
     <script>
-        // Optional: Add any specific logic needed for the app to function
+        let chartInstance;
+
+        function runSimulation() {
+            // Your simulation logic here
+            alert("Monte Carlo Simulation triggered!");
+        }
     </script>
 </body>
 </html>
