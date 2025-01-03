@@ -3,40 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="fc:frame" content='{
-    "version": "next",
-    "imageUrl": "https://via.placeholder.com/600x400.png?text=Monte+Carlo+Simulation",
-    "button": {
-        "title": "Enter Simulation",
-        "action": {
-            "type": "launch_frame",
-            "name": "Monte Carlo Simulation",
-            "url": "https://monte-carlo-gamma.vercel.app/",
-            "splashImageUrl": "https://via.placeholder.com/200.png?text=Loading",
-            "splashBackgroundColor": "#6a0dad"
-        }
-    }
-}' />
-
     <title>Monte Carlo Simulation</title>
+
+    <!-- Farcaster Frame Metadata -->
+    <meta name="fc:frame" content='{
+        "version": "next",
+        "imageUrl": "https://via.placeholder.com/600x400.png?text=Monte+Carlo+Simulation",
+        "buttons": [
+            {
+                "title": "Enter Crypto Ticker",
+                "action": {
+                    "type": "post",
+                    "url": "/frame-handler",
+                    "payload": {
+                        "type": "input",
+                        "key": "cryptoTicker"
+                    }
+                }
+            },
+            {
+                "title": "Run Simulation",
+                "action": {
+                    "type": "launch_frame",
+                    "url": "https://monte-carlo-gamma.vercel.app/",
+                    "splashBackgroundColor": "#6a0dad"
+                }
+            }
+        ]
+    }' />
+
+    <!-- Include Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Inline Styles -->
     <style>
         body {
-            background-color: #6a0dad; /* Purple background */
-            color: black; /* Black text */
+            background-color: #6a0dad;
+            color: white;
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
+            margin: 0;
         }
 
         h1 {
-            color: white;
             margin-bottom: 20px;
+        }
+
+        .input-container {
+            margin: 10px;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            width: 250px;
+            margin-right: 10px;
         }
 
         .button {
@@ -44,51 +69,53 @@
             padding: 10px 20px;
             font-size: 16px;
             color: #fff;
-            background-color: #8a2be2; /* Light purple button */
+            background-color: #8a2be2;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            text-align: center;
         }
 
         .button:hover {
-            background-color: #7a1fa2; /* Darker purple on hover */
+            background-color: #7a1fa2;
         }
 
         .chart-container {
+            margin-top: 20px;
             background-color: white;
             border-radius: 10px;
             padding: 20px;
-            margin-top: 20px;
         }
 
         canvas {
-            background-color: white; /* White chart background */
-        }
-
-        .footer-button {
-            margin-top: 40px; /* Increased margin to move it further down */
-            padding: 10px 20px;
+            background-color: white;
         }
     </style>
 </head>
 <body>
     <h1>Monte Carlo Simulation</h1>
-    <div>
+    <div class="input-container">
         <input type="text" id="cryptoTicker" placeholder="Enter Crypto Ticker (e.g., BTC)">
-        <button class="button" onclick="runSimulation()">Run Simulation</button>
-        <button class="button" onclick="resetSimulation()">Reset</button>
+        <button class="button" onclick="saveTicker()">Enter Ticker</button>
     </div>
-    <p id="errorMessage" style="color: red;"></p>
+    <div class="button-container">
+        <button class="button" onclick="runSimulation()">Run Simulation</button>
+    </div>
     <div class="chart-container">
         <canvas id="simulationChart" width="800" height="400"></canvas>
     </div>
-    <button class="button footer-button" onclick="window.open('https://www.ibm.com/think/topics/monte-carlo-simulation', '_blank')">
-        What is a Monte Carlo Simulation?
-    </button>
 
     <script>
         let chartInstance;
+        let selectedTicker = '';
+
+        function saveTicker() {
+            selectedTicker = document.getElementById("cryptoTicker").value;
+            if (!selectedTicker) {
+                alert("Please enter a valid cryptocurrency ticker!");
+                return;
+            }
+            alert(`Ticker "${selectedTicker}" saved!`);
+        }
 
         async function fetchHistoricalData(ticker) {
             const url = `https://api.coingecko.com/api/v3/coins/${ticker}/market_chart?vs_currency=usd&days=120`;
@@ -104,11 +131,7 @@
         }
 
         function calculateDailyReturns(prices) {
-            const returns = [];
-            for (let i = 1; i < prices.length; i++) {
-                returns.push((prices[i] - prices[i - 1]) / prices[i - 1]);
-            }
-            return returns;
+            return prices.slice(1).map((price, i) => (price - prices[i]) / prices[i]);
         }
 
         function monteCarloSimulation(startPrice, dailyReturns, numDays = 30, numSimulations = 300) {
@@ -130,12 +153,12 @@
         }
 
         async function runSimulation() {
-            const ticker = document.getElementById("cryptoTicker").value.toLowerCase();
-            const errorMessage = document.getElementById("errorMessage");
-            errorMessage.textContent = "";
-
+            if (!selectedTicker) {
+                alert("Please enter and save a cryptocurrency ticker first!");
+                return;
+            }
             try {
-                const historicalPrices = await fetchHistoricalData(ticker);
+                const historicalPrices = await fetchHistoricalData(selectedTicker.toLowerCase());
                 const startPrice = historicalPrices[historicalPrices.length - 1];
                 const dailyReturns = calculateDailyReturns(historicalPrices);
                 const { simulations, avgPrices } = monteCarloSimulation(startPrice, dailyReturns);
@@ -169,39 +192,17 @@
                     options: {
                         responsive: true,
                         plugins: {
-                            legend: {
-                                display: false,
-                            },
+                            legend: { display: false },
                         },
                         scales: {
-                            x: {
-                                title: {
-                                    display: true,
-                                    text: "Days",
-                                },
-                            },
-                            y: {
-                                title: {
-                                    display: true,
-                                    text: "Price (USD)",
-                                },
-                            },
+                            x: { title: { display: true, text: "Days" } },
+                            y: { title: { display: true, text: "Price (USD)" } },
                         },
                     },
                 });
             } catch (error) {
-                errorMessage.textContent = error.message;
-            }
-        }
-
-        function resetSimulation() {
-            const errorMessage = document.getElementById("errorMessage");
-            errorMessage.textContent = "";
-            document.getElementById("cryptoTicker").value = "";
-
-            if (chartInstance) {
-                chartInstance.destroy();
-                chartInstance = null;
+                console.error(error);
+                alert(error.message);
             }
         }
     </script>
