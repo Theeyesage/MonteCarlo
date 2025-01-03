@@ -1,10 +1,11 @@
 {
   "name": "Monte Carlo Simulation",
   "author": "Your Name",
-  "homeUrl":  "https://theeyesage.github.io/MonteCarlo/",
-  "iconUrl": "https://your-hosted-site.com/icon.png",
-  "imageUrl": "https://your-hosted-site.com/monte-carlo-thumbnail.png",
-  "buttonTitle": "Run Monte Carlo",
-  "splashImageUrl": "https://your-hosted-site.com/splash.png",
+  "homeUrl": "https://theeyesage.github.io/MonteCarlo/",
+  "iconUrl": "https://<username>.github.io/<repository-name>/images/icon.png",
+  "imageUrl": "https://<username>.github.io/<repository-name>/images/thumbnail.png",
+  "buttonTitle": "Open Simulation",
+  "splashImageUrl": "https://<username>.github.io/<repository-name>/images/splash.png",
   "splashBackgroundColor": "#6a0dad"
 }
+
