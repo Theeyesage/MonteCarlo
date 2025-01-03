@@ -5,7 +5,7 @@
   "iconUrl": "https://<username>.github.io/<repository-name>/images/icon.png",
   "imageUrl": "https://<username>.github.io/<repository-name>/images/thumbnail.png",
   "buttonTitle": "Open Simulation",
-  "splashImageUrl": "https://<username>.github.io/<repository-name>/images/splash.png",
+  "splashImageUrl": "https://theeyesage.github.io/MonteCarlo/",
   "splashBackgroundColor": "#6a0dad"
 }
 
