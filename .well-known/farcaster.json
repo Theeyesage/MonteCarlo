@@ -2,7 +2,10 @@
   "name": "Monte Carlo Simulation",
   "author": "Your Name",
   "homeUrl": "https://theeyesage.github.io/MonteCarlo/",
+  "iconUrl": "https://via.placeholder.com/200.png?text=Icon",
+  "imageUrl": "https://via.placeholder.com/600x400.png?text=Monte+Carlo+Simulation",
   "buttonTitle": "Enter Simulation",
+  "splashImageUrl": "https://via.placeholder.com/200.png?text=Loading",
   "splashBackgroundColor": "#6a0dad"
 }
 
