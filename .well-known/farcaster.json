@@ -1,14 +1,16 @@
 {
-  "name": "Monte Carlo Simulation",
-  "author": "Your Name",
-  "homeUrl": "https://monte-carlo-gamma.vercel.app/",
-  "iconUrl": "https://via.placeholder.com/200.png?text=Icon",
-  "imageUrl": "https://via.placeholder.com/600x400.png?text=Monte+Carlo+Simulation",
-  "buttonTitle": "Run Simulation",
-  "splashImageUrl": "https://via.placeholder.com/200.png?text=Loading",
-  "splashBackgroundColor": "#6a0dad",
-  "fc:manifest.accountAssociation": {
-    "type": "manual",
-    "instructions": "This frame requires manual account association. Please contact the developer for details."
+  "accountAssociation": {
+    "header": "",
+    "payload": "",
+    "signature": ""
+  },
+  "frame": {
+    "name": "Monte Carlo Simulator",
+    "version": "1.0.0",
+    "iconUrl": "https://example.com/monte-carlo-simulation-thumbnail.png",
+    "homeUrl": "https://monte-carlo-gamma.vercel.app/",
+    "splashImageUrl": "https://example.com/splash.png",
+    "splashBackgroundColor": "#6a0dad",
+    "webhookUrl": "https://example.com/webhook"
   }
 }
