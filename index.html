@@ -44,58 +44,85 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             height: 100vh;
+            max-width: 424px;
+            margin: 0 auto; /* Center the frame horizontally */
+            overflow-y: auto; /* Enable scrolling for long content */
         }
 
         h1 {
             color: white;
-            margin-bottom: 20px;
+            margin: 20px 0 10px;
+            text-align: center;
         }
 
         .button {
-            margin: 10px;
+            margin: 10px 0;
             padding: 10px 20px;
-            font-size: 16px;
+            font-size: 14px;
             color: #fff;
             background-color: #8a2be2;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             text-align: center;
+            width: 90%; /* Button fits within the modal width */
+            max-width: 350px;
         }
 
         .button:hover {
             background-color: #7a1fa2;
         }
 
+        .input-container {
+            width: 90%;
+            max-width: 350px;
+            margin: 10px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         .chart-container {
             background-color: white;
             border-radius: 10px;
-            padding: 20px;
+            padding: 10px;
             margin-top: 20px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         canvas {
             background-color: white;
+            width: 100%;
+            height: auto;
         }
 
         .footer-button {
-            margin-top: 40px;
-            padding: 10px 20px;
+            margin-top: 20px;
+            width: 90%;
+            max-width: 350px;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
         }
     </style>
 </head>
 <body>
     <h1>Monte Carlo Simulation</h1>
-    <div>
-        <input type="text" id="cryptoTicker" placeholder="Enter Crypto Ticker (e.g., BTC)">
+    <div class="input-container">
+        <input type="text" id="cryptoTicker" placeholder="Enter Crypto Ticker (e.g., BTC)" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
         <button class="button" onclick="runSimulation()">Run Simulation</button>
         <button class="button" onclick="resetSimulation()">Reset</button>
+        <p id="errorMessage" class="error-message"></p>
     </div>
-    <p id="errorMessage" style="color: red;"></p>
     <div class="chart-container">
-        <canvas id="simulationChart" width="800" height="400"></canvas>
+        <canvas id="simulationChart"></canvas>
     </div>
     <button class="button footer-button" onclick="window.open('https://www.ibm.com/think/topics/monte-carlo-simulation', '_blank')">
         What is a Monte Carlo Simulation?
