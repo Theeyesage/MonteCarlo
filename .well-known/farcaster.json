@@ -7,9 +7,9 @@
   "frame": {
     "name": "Monte Carlo Simulator",
     "version": "1.0.0",
-    "iconUrl": "https://example.com/monte-carlo-simulation-thumbnail.png",
+    "iconUrl": "https://theeyesage.github.io/MonteCarlo/decoy3.png",
     "homeUrl": "https://monte-carlo-gamma.vercel.app/",
-    "splashImageUrl": "https://example.com/splash.png",
+    "splashImageUrl": "https://theeyesage.github.io/MonteCarlo/decoy1.png",
     "splashBackgroundColor": "#6a0dad",
     "webhookUrl": "https://example.com/webhook"
   }
